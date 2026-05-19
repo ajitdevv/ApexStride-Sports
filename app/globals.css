@@ -11,15 +11,15 @@
   --primary-foreground: #f8fbff;
   --secondary: #e7eefb;
   --secondary-foreground: #10233f;
-  --muted: #62748e;
-  --muted-foreground: #516176;
+  --muted: #52647b;
+  --muted-foreground: #3f5168;
   --accent: #0ea5e9;
   --accent-foreground: #041421;
   --success: #0f9f6e;
   --warning: #f59e0b;
   --danger: #dc2626;
-  --border: #d7dfeb;
-  --input: #d7dfeb;
+  --border: #c9d6e6;
+  --input: #c9d6e6;
   --ring: rgba(20, 71, 230, 0.35);
   --shadow-soft: 0 20px 45px rgba(15, 23, 42, 0.08);
   --shadow-card: 0 16px 32px rgba(15, 23, 42, 0.06);
@@ -115,4 +115,45 @@ main {
 
 .surface-shadow {
   box-shadow: var(--shadow-soft);
+}
+
+.surface-card {
+  border-color: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.surface-card-soft {
+  border-color: rgba(201, 214, 230, 0.9);
+  background: rgba(248, 251, 255, 0.9);
+}
+
+.surface-glass {
+  border-color: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.surface-dark-panel {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(13, 27, 48, 0.94);
+}
+
+.surface-dark-subtle {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.text-contrast-muted {
+  color: var(--muted-foreground);
+}
+
+.text-contrast-soft {
+  color: #5c7087;
+}
+
+.text-dark-muted {
+  color: #d5e0ef;
+}
+
+.text-dark-soft {
+  color: #b8c5d6;
 }

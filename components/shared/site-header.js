@@ -14,18 +14,19 @@ export async function SiteHeader() {
   const authItems = isAuthenticated ? [{ label: "Account", href: "/account" }] : accountNavigation.slice(1);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/60 bg-background/78 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 border-b border-white/70 bg-background/88 backdrop-blur-xl">
       <SectionShell className="relative flex min-h-20 items-center justify-between gap-4 py-3">
         <LogoMark />
-        <div className="hidden xl:flex xl:items-center xl:gap-3">
+        <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center lg:gap-3">
           <NavLinks items={mainNavigation.filter((item) => item.href !== "/cart")} />
           <CartNavLink />
         </div>
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden lg:flex lg:items-center lg:gap-3">
           <NavLinks items={authItems} />
+          {session.isAdmin ? <Button href="/admin" variant="outline">Admin Panel</Button> : null}
           <Button href={siteConfig.hero.primaryCta.href}>{siteConfig.hero.primaryCta.label}</Button>
         </div>
-        <MobileNav isAuthenticated={isAuthenticated} primaryCta={siteConfig.hero.primaryCta} />
+        <MobileNav isAdmin={session.isAdmin} isAuthenticated={isAuthenticated} primaryCta={siteConfig.hero.primaryCta} />
       </SectionShell>
     </header>
   );

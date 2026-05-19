@@ -126,8 +126,8 @@ export function AuthForm({ mode }) {
         <div
           className={`rounded-2xl border px-4 py-3 text-sm ${
             status.type === "error"
-              ? "border-danger/20 bg-red-50 text-red-700"
-              : "border-emerald-200 bg-emerald-50 text-emerald-800"
+              ? "border-danger/20 bg-red-50 text-red-800"
+              : "border-emerald-200 bg-emerald-50 text-emerald-900"
           }`}
         >
           {status.message}

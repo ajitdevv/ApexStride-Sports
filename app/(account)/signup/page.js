@@ -23,10 +23,10 @@ export default async function SignupPage() {
       <SiteHeader />
       <main>
         <SectionShell className="py-12 sm:py-16">
-          <div className="mx-auto max-w-xl rounded-4xl border border-white/60 bg-white/90 p-8 card-shadow sm:p-10">
+          <div className="mx-auto max-w-xl rounded-4xl border surface-card bg-white/94 p-8 card-shadow sm:p-10">
             <BadgePill>New customer account</BadgePill>
             <h1 className="mt-5 text-4xl font-semibold tracking-tight text-foreground">Create your ApexStride account</h1>
-            <p className="mt-4 text-sm leading-8 text-muted-foreground sm:text-base">
+            <p className="mt-4 text-sm leading-8 text-contrast-muted sm:text-base">
               Join the storefront to save your profile, prepare for future order history, and build a smoother premium shopping journey.
             </p>
             <AuthForm mode="signup" />

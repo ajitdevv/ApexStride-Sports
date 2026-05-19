@@ -1,8 +1,12 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useMemo, useSyncExternalStore } from "react";
 
 const storageKey = "apexstride-cart";
+const cartChangeEvent = "apexstride-cart-change";
+const emptyCartItems = [];
+let cachedSerializedCart = null;
+let cachedCartItems = emptyCartItems;
 const CartContext = createContext(null);
 
 function normalizeQuantity(quantity) {
@@ -42,45 +46,79 @@ function normalizeCartItems(items) {
   return items.map(normalizeCartItem).filter(Boolean);
 }
 
+function getEmptyCartSnapshot() {
+  return emptyCartItems;
+}
+
+function readStoredCartItems() {
+  if (typeof window === "undefined") {
+    return emptyCartItems;
+  }
+
+  try {
+    const storedItems = window.localStorage.getItem(storageKey);
+    const serializedCart = storedItems ?? "[]";
+
+    if (serializedCart === cachedSerializedCart) {
+      return cachedCartItems;
+    }
+
+    cachedSerializedCart = serializedCart;
+    cachedCartItems = normalizeCartItems(JSON.parse(serializedCart));
+
+    return cachedCartItems;
+  } catch {
+    cachedSerializedCart = "[]";
+    cachedCartItems = emptyCartItems;
+
+    return cachedCartItems;
+  }
+}
+
+function writeStoredCartItems(items) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  window.localStorage.setItem(storageKey, JSON.stringify(items));
+  window.dispatchEvent(new Event(cartChangeEvent));
+}
+
+function subscribeToCart(callback) {
+  if (typeof window === "undefined") {
+    return () => {};
+  }
+
+  function handleStorage(event) {
+    if (event.type === cartChangeEvent || event.key === storageKey) {
+      callback();
+    }
+  }
+
+  window.addEventListener("storage", handleStorage);
+  window.addEventListener(cartChangeEvent, handleStorage);
+
+  return () => {
+    window.removeEventListener("storage", handleStorage);
+    window.removeEventListener(cartChangeEvent, handleStorage);
+  };
+}
+
+function subscribeToHydration() {
+  return () => {};
+}
+
+function getHydratedSnapshot() {
+  return true;
+}
+
+function getHydratedServerSnapshot() {
+  return false;
+}
+
 export function CartProvider({ children }) {
-  const [items, setItems] = useState(() => {
-    if (typeof window === "undefined") {
-      return [];
-    }
-
-    try {
-      const storedItems = window.localStorage.getItem(storageKey);
-      return normalizeCartItems(storedItems ? JSON.parse(storedItems) : []);
-    } catch {
-      return [];
-    }
-  });
-  const hydrated = true;
-
-  useEffect(() => {
-    function handleStorage(event) {
-      if (event.key !== storageKey) {
-        return;
-      }
-
-      try {
-        setItems(normalizeCartItems(event.newValue ? JSON.parse(event.newValue) : []));
-      } catch {
-        setItems([]);
-      }
-    }
-
-    window.addEventListener("storage", handleStorage);
-    return () => window.removeEventListener("storage", handleStorage);
-  }, []);
-
-  useEffect(() => {
-    if (!hydrated) {
-      return;
-    }
-
-    window.localStorage.setItem(storageKey, JSON.stringify(items));
-  }, [hydrated, items]);
+  const items = useSyncExternalStore(subscribeToCart, readStoredCartItems, getEmptyCartSnapshot);
+  const hydrated = useSyncExternalStore(subscribeToHydration, getHydratedSnapshot, getHydratedServerSnapshot);
 
   const addItem = useCallback((product, quantity = 1) => {
     const normalizedProduct = normalizeCartItem({
@@ -92,49 +130,53 @@ export function CartProvider({ children }) {
       return;
     }
 
-    setItems((currentItems) => {
-      const existingItem = currentItems.find((item) => item.slug === normalizedProduct.slug);
+    const currentItems = readStoredCartItems();
+    const existingItem = currentItems.find((item) => item.slug === normalizedProduct.slug);
 
-      if (!existingItem) {
-        return [...currentItems, normalizedProduct];
-      }
+    if (!existingItem) {
+      writeStoredCartItems([...currentItems, normalizedProduct]);
+      return;
+    }
 
-      return currentItems.map((item) =>
+    writeStoredCartItems(
+      currentItems.map((item) =>
         item.slug === normalizedProduct.slug
           ? {
               ...item,
               quantity: normalizeQuantity(item.quantity + normalizedProduct.quantity),
             }
           : item
-      );
-    });
+      )
+    );
   }, []);
 
   const updateQuantity = useCallback((slug, quantity) => {
     const normalizedQuantity = Number(quantity);
+    const currentItems = readStoredCartItems();
 
-    setItems((currentItems) => {
-      if (!Number.isFinite(normalizedQuantity) || normalizedQuantity <= 0) {
-        return currentItems.filter((item) => item.slug !== slug);
-      }
+    if (!Number.isFinite(normalizedQuantity) || normalizedQuantity <= 0) {
+      writeStoredCartItems(currentItems.filter((item) => item.slug !== slug));
+      return;
+    }
 
-      return currentItems.map((item) =>
+    writeStoredCartItems(
+      currentItems.map((item) =>
         item.slug === slug
           ? {
               ...item,
               quantity: normalizeQuantity(normalizedQuantity),
             }
           : item
-      );
-    });
+      )
+    );
   }, []);
 
   const removeItem = useCallback((slug) => {
-    setItems((currentItems) => currentItems.filter((item) => item.slug !== slug));
+    writeStoredCartItems(readStoredCartItems().filter((item) => item.slug !== slug));
   }, []);
 
   const clearCart = useCallback(() => {
-    setItems([]);
+    writeStoredCartItems([]);
   }, []);
 
   const value = useMemo(() => {
