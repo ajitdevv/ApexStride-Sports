@@ -16,7 +16,7 @@ const defaultMessages = {
   },
 };
 
-export function AuthForm({ mode }) {
+export function AuthForm({ mode, redirectTo = "/account" }) {
   const router = useRouter();
   const supabase = useMemo(() => createSupabaseBrowserClient(), []);
   const messages = defaultMessages[mode];
@@ -59,7 +59,7 @@ export function AuthForm({ mode }) {
 
       setStatus({ type: "success", message: messages.success });
       setIsSubmitting(false);
-      router.push("/login");
+      router.push(redirectTo === "/account" ? "/login" : `/login?next=${encodeURIComponent(redirectTo)}`);
       router.refresh();
       return;
     }
@@ -77,7 +77,7 @@ export function AuthForm({ mode }) {
 
     setStatus({ type: "success", message: messages.success });
     setIsSubmitting(false);
-    router.push("/account");
+    router.push(redirectTo);
     router.refresh();
   }
 

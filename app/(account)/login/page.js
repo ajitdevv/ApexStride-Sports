@@ -11,11 +11,13 @@ export const metadata = {
   title: "Login",
 };
 
-export default async function LoginPage() {
+export default async function LoginPage({ searchParams }) {
   const session = await getSessionSnapshot();
+  const resolvedSearchParams = await searchParams;
+  const nextPath = typeof resolvedSearchParams?.next === "string" && resolvedSearchParams.next.startsWith("/") ? resolvedSearchParams.next : "/account";
 
   if (session.user) {
-    redirect("/account");
+    redirect(nextPath);
   }
 
   return (
@@ -29,9 +31,9 @@ export default async function LoginPage() {
             <p className="mt-4 text-sm leading-8 text-contrast-muted sm:text-base">
               Sign in to manage your account, review your profile, and continue your ApexStride Sports journey.
             </p>
-            <AuthForm mode="login" />
+            <AuthForm mode="login" redirectTo={nextPath} />
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <Button href="/signup" variant="outline">
+              <Button href={nextPath === "/account" ? "/signup" : `/signup?next=${encodeURIComponent(nextPath)}`} variant="outline">
                 Create account
               </Button>
               <Button href="/shop" variant="ghost">

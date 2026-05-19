@@ -11,7 +11,7 @@ export function LogoMark({ className }) {
         <span className="text-sm font-semibold uppercase tracking-[0.28em] text-primary">
           ApexStride
         </span>
-        <span className="text-sm text-muted-foreground">Premium Sports</span>
+        <span className="text-sm text-foreground/72">Premium Sports</span>
       </span>
     </Link>
   );

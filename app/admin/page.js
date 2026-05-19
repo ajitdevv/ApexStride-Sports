@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Boxes, ClipboardList, LayoutDashboard, Users } from "lucide-react";
+import { ArrowRight, Boxes, ClipboardList, LayoutDashboard, Sparkles, Users } from "lucide-react";
 import { AdminOverviewChart } from "@/components/admin/overview-chart";
 import { BadgePill } from "@/components/shared/badge-pill";
 import { MetricCard } from "@/components/admin/metric-card";
@@ -26,7 +26,7 @@ const quickActions = [
   {
     label: "View customers",
     href: "/admin/customers",
-    description: "Check customer-facing account activity and prepare future service workflows.",
+    description: "Prepare customer-facing account activity and future support workflows.",
     icon: Users,
   },
 ];
@@ -79,7 +79,7 @@ export default async function AdminPage() {
     {
       label: "Pending payment",
       value: `${orderSummary.pendingOrders}`,
-      detail: "Orders still waiting on a payment confirmation or admin review.",
+      detail: "Orders still waiting on payment confirmation or manual review.",
     },
     {
       label: "Paid orders",
@@ -111,10 +111,10 @@ export default async function AdminPage() {
           <div>
             <BadgePill className="border-white/10 bg-white/10 text-sky-200">Admin dashboard</BadgePill>
             <h1 className="mt-5 max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-              A premium control center for orders, catalog health, and next actions.
+              A clearer control center for orders, catalog health, and next actions.
             </h1>
             <p className="mt-5 max-w-2xl text-sm leading-8 text-slate-300 sm:text-base">
-              Review live order activity, move into nested admin workspaces, and keep the storefront operation easy to manage from a cleaner workspace.
+              Review live order activity, move between nested admin workspaces, and keep the storefront operation easier to scan from one premium dashboard.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link
@@ -180,10 +180,10 @@ export default async function AdminPage() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="group rounded-[1.75rem] border border-white/10 bg-[#0d1b30] p-5 transition hover:border-sky-300/25 hover:bg-[#11203a]"
+                className="group rounded-[1.6rem] border border-white/10 bg-[#0d1b30] p-5 transition hover:border-sky-300/25 hover:bg-[#11203a]"
               >
                 <div className="flex items-start gap-4">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-sky-200 transition group-hover:bg-sky-400/14">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-sky-200 transition group-hover:bg-sky-400/14">
                     <item.icon className="h-5 w-5" />
                   </span>
                   <div className="min-w-0 flex-1">
@@ -200,23 +200,30 @@ export default async function AdminPage() {
         </div>
 
         <div className="rounded-4xl border border-white/12 bg-white/8 p-6 backdrop-blur-xl sm:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-200">Recent orders</p>
-          <h2 className="mt-3 text-2xl font-semibold tracking-tight text-white">Stay close to the live checkout queue</h2>
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-200">Recent orders</p>
+              <h2 className="mt-3 text-2xl font-semibold tracking-tight text-white">Stay close to the live checkout queue</h2>
+            </div>
+            <span className="rounded-full border border-white/10 bg-white/8 px-3 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">
+              {orderSummary.recentOrders.length} visible
+            </span>
+          </div>
           <div className="mt-6 grid gap-3 text-sm text-slate-300">
             {orderSummary.recentOrders.length ? (
               orderSummary.recentOrders.map((order) => (
-                <div key={order.id} className="rounded-3xl border border-white/10 bg-[#0d1b30] px-4 py-4">
+                <div key={order.id} className="rounded-[1.5rem] border border-white/10 bg-[#0d1b30] px-4 py-4">
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                     <p className="font-semibold text-white">{order.order_number}</p>
                     <BadgePill className="border-white/10 bg-white/5 text-sky-200">{order.status}</BadgePill>
                   </div>
-                  <p className="mt-3 leading-6 text-dark-muted">
+                  <p className="mt-3 text-sm leading-6 text-dark-muted">
                     {order.currency} {Number(order.total_amount ?? 0)}
                   </p>
                 </div>
               ))
             ) : (
-              <div className="rounded-3xl border border-white/10 bg-[#0d1b30] px-4 py-4 text-slate-300">No orders are available yet.</div>
+              <div className="rounded-[1.5rem] border border-white/10 bg-[#0d1b30] px-4 py-4 text-slate-300">No orders are available yet.</div>
             )}
           </div>
         </div>
@@ -225,18 +232,18 @@ export default async function AdminPage() {
       <section className="grid gap-6 rounded-4xl border border-white/12 bg-white/8 p-6 backdrop-blur-xl sm:p-8 xl:grid-cols-[1fr_1fr]">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-200">Catalog snapshot</p>
-          <h2 className="mt-4 text-2xl font-semibold tracking-tight text-white">Keep the merchandising surface easy to scan</h2>
+          <h2 className="mt-4 text-2xl font-semibold tracking-tight text-white">Keep merchandising surfaces easy to scan</h2>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-dark-muted">
             Track active categories and featured products while the catalog workspace expands into deeper product management.
           </p>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2">
-          <article className="rounded-[1.75rem] border border-white/10 bg-[#0d1b30] p-5">
+        <div className="grid gap-4 sm:grid-cols-2">
+          <article className="rounded-[1.6rem] border border-white/10 bg-[#0d1b30] p-5">
             <p className="text-sm font-semibold text-white">Categories</p>
             <div className="mt-4 grid gap-3">
               {catalog.categories.length ? (
                 catalog.categories.map((category) => (
-                  <div key={category.slug} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
+                  <div key={category.slug} className="rounded-[1.2rem] border border-white/10 bg-white/5 px-4 py-3">
                     <p className="font-medium text-white">{category.name}</p>
                     <p className="mt-1 text-sm leading-6 text-dark-muted">{category.description || "Category ready for storefront browsing."}</p>
                   </div>
@@ -246,12 +253,17 @@ export default async function AdminPage() {
               )}
             </div>
           </article>
-          <article className="rounded-[1.75rem] border border-white/10 bg-[#0d1b30] p-5">
-            <p className="text-sm font-semibold text-white">Featured products</p>
+          <article className="rounded-[1.6rem] border border-white/10 bg-[#0d1b30] p-5">
+            <div className="flex items-center justify-between gap-3">
+              <p className="text-sm font-semibold text-white">Featured products</p>
+              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-200">
+                {catalog.featuredCount}
+              </span>
+            </div>
             <div className="mt-4 grid gap-3">
               {catalog.featuredProducts.length ? (
                 catalog.featuredProducts.map((product) => (
-                  <div key={product.slug} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
+                  <div key={product.slug} className="rounded-[1.2rem] border border-white/10 bg-white/5 px-4 py-3">
                     <p className="font-medium text-white">{product.name}</p>
                     <p className="mt-1 text-sm leading-6 text-dark-muted">
                       {product.category?.name ?? "Uncategorized"} · {product.currency} {product.basePrice}
@@ -274,17 +286,53 @@ export default async function AdminPage() {
             Jump back to the public storefront whenever you need to confirm the customer experience.
           </p>
         </div>
-        <div className="grid gap-3">
+        <div className="grid gap-3 sm:grid-cols-2">
           {storefrontLinks.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-2xl border border-white/10 bg-[#0d1b30] px-4 py-4 text-sm font-semibold text-white transition hover:border-sky-300/30 hover:text-sky-200"
+              className="rounded-[1.3rem] border border-white/10 bg-[#0d1b30] px-4 py-4 text-sm font-semibold text-white transition hover:border-sky-300/30 hover:text-sky-200"
             >
               {item.label}
             </Link>
           ))}
         </div>
+      </section>
+
+      <section className="grid gap-4 md:grid-cols-3">
+        <article className="rounded-4xl border border-white/12 bg-white/8 p-5 backdrop-blur-xl">
+          <div className="flex items-center gap-3">
+            <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-[#0d1b30] text-sky-200">
+              <ClipboardList className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-200">Pending now</p>
+              <p className="mt-1 text-2xl font-semibold text-white">{orderSummary.pendingOrders}</p>
+            </div>
+          </div>
+        </article>
+        <article className="rounded-4xl border border-white/12 bg-white/8 p-5 backdrop-blur-xl">
+          <div className="flex items-center gap-3">
+            <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-[#0d1b30] text-sky-200">
+              <Boxes className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-200">Catalog live</p>
+              <p className="mt-1 text-2xl font-semibold text-white">{catalog.productCount}</p>
+            </div>
+          </div>
+        </article>
+        <article className="rounded-4xl border border-white/12 bg-white/8 p-5 backdrop-blur-xl">
+          <div className="flex items-center gap-3">
+            <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-[#0d1b30] text-sky-200">
+              <Sparkles className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-200">Featured active</p>
+              <p className="mt-1 text-2xl font-semibold text-white">{catalog.featuredCount}</p>
+            </div>
+          </div>
+        </article>
       </section>
 
       <AdminOverviewChart

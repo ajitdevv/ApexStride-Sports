@@ -16,6 +16,22 @@ function formatCustomer(order) {
   return order.profiles?.full_name || (order.profile_id ? "Signed-in customer" : "Guest checkout");
 }
 
+function getStatusTone(status) {
+  if (status === "fulfilled") {
+    return "border-emerald-200/30 bg-emerald-400/10 text-emerald-100";
+  }
+
+  if (status === "paid") {
+    return "border-sky-200/30 bg-sky-400/10 text-sky-100";
+  }
+
+  if (status === "pending_payment") {
+    return "border-amber-200/30 bg-amber-400/10 text-amber-100";
+  }
+
+  return "border-white/10 bg-white/5 text-white";
+}
+
 export function OrdersList({ orders }) {
   if (!orders.length) {
     return (
@@ -28,55 +44,69 @@ export function OrdersList({ orders }) {
   return (
     <section className="grid gap-4 xl:gap-5">
       {orders.map((order) => (
-        <article key={order.id} className="rounded-4xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl sm:p-8">
+        <article key={order.id} className="rounded-4xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl sm:p-6">
           <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
-            <div className="grid gap-4">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-200">{order.order_number}</p>
-                <h2 className="mt-3 text-2xl font-semibold tracking-tight text-white">{formatCustomer(order)}</h2>
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-col gap-4 border-b border-white/10 pb-5 lg:flex-row lg:items-start lg:justify-between">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-200">{order.order_number}</p>
+                  <h2 className="mt-3 text-2xl font-semibold tracking-tight text-white">{formatCustomer(order)}</h2>
+                  <p className="mt-2 text-sm leading-7 text-dark-muted">
+                    {order.profile_id ? "Authenticated checkout" : "Guest checkout"} · {order.payment_provider || "Payment provider pending"}
+                  </p>
+                </div>
+                <div className={`inline-flex items-center justify-center rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] ${getStatusTone(order.status)}`}>
+                  {order.status}
+                </div>
               </div>
-              <div className="grid gap-3 text-sm leading-7 text-slate-300 sm:grid-cols-2 xl:grid-cols-3">
-                <div className="rounded-2xl border border-white/10 bg-[#0d1b30] px-4 py-3">
-                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Status</span>
-                  <p className="mt-2 font-semibold text-white">{order.status}</p>
+
+              <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                <div className="rounded-[1.3rem] border border-white/10 bg-[#0d1b30] px-4 py-3">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">Total</span>
+                  <p className="mt-2 text-base font-semibold text-white">{formatPrice(Number(order.total_amount ?? 0), order.currency ?? "INR")}</p>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-[#0d1b30] px-4 py-3">
-                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Total</span>
-                  <p className="mt-2 font-semibold text-white">{formatPrice(Number(order.total_amount ?? 0), order.currency ?? "INR")}</p>
+                <div className="rounded-[1.3rem] border border-white/10 bg-[#0d1b30] px-4 py-3">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">Placed</span>
+                  <p className="mt-2 text-sm font-semibold leading-6 text-white">{formatTimestamp(order.placed_at ?? order.created_at)}</p>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-[#0d1b30] px-4 py-3">
-                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Placed</span>
-                  <p className="mt-2 font-semibold text-white">{formatTimestamp(order.placed_at ?? order.created_at)}</p>
+                <div className="rounded-[1.3rem] border border-white/10 bg-[#0d1b30] px-4 py-3">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">Reference</span>
+                  <p className="mt-2 text-sm font-semibold leading-6 text-white">{order.payment_reference || "Pending"}</p>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-[#0d1b30] px-4 py-3">
-                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Provider</span>
-                  <p className="mt-2 font-semibold text-white">{order.payment_provider || "Not set"}</p>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-[#0d1b30] px-4 py-3">
-                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Reference</span>
-                  <p className="mt-2 font-semibold text-white">{order.payment_reference || "Pending"}</p>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-[#0d1b30] px-4 py-3">
-                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Checkout type</span>
-                  <p className="mt-2 font-semibold text-white">{order.profile_id ? "Authenticated" : "Guest"}</p>
+                <div className="rounded-[1.3rem] border border-white/10 bg-[#0d1b30] px-4 py-3">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">Customer type</span>
+                  <p className="mt-2 text-sm font-semibold leading-6 text-white">{order.profile_id ? "Authenticated" : "Guest"}</p>
                 </div>
               </div>
             </div>
-            <OrderStatusForm orderId={order.id} currentStatus={order.status} />
+
+            <div className="xl:w-[15.5rem] xl:shrink-0">
+              <OrderStatusForm orderId={order.id} currentStatus={order.status} />
+            </div>
           </div>
-          <div className="mt-6 rounded-[1.75rem] border border-white/10 bg-[#0d1b30] p-5">
-            <p className="text-sm font-semibold text-white">Order items</p>
+
+          <div className="mt-5 rounded-[1.6rem] border border-white/10 bg-[#0d1b30] p-5">
+            <div className="flex flex-col gap-2 border-b border-white/10 pb-4 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="text-sm font-semibold text-white">Order items</p>
+                <p className="mt-1 text-sm leading-6 text-dark-muted">A focused view of every line attached to this order.</p>
+              </div>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+                {order.order_items?.length ?? 0} line item{order.order_items?.length === 1 ? "" : "s"}
+              </p>
+            </div>
+
             <div className="mt-4 grid gap-3 text-sm text-slate-300">
               {order.order_items?.length ? (
                 order.order_items.map((item) => (
-                  <div key={item.id} className="flex flex-col gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
+                  <div key={item.id} className="flex flex-col gap-3 rounded-[1.3rem] border border-white/10 bg-white/5 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="min-w-0">
                       <p className="font-medium text-white">{item.product_name}</p>
-                      <p className="mt-1 text-xs uppercase tracking-[0.18em] text-slate-400">{item.variant_title || "Catalog item"}</p>
+                      <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-slate-400">{item.variant_title || "Catalog item"}</p>
                     </div>
-                    <div className="text-sm leading-6 sm:text-right">
+                    <div className="grid gap-1 text-sm sm:text-right">
                       <p>Qty: {item.quantity}</p>
-                      <p>{formatPrice(Number(item.line_total ?? 0), order.currency ?? "INR")}</p>
+                      <p className="font-semibold text-white">{formatPrice(Number(item.line_total ?? 0), order.currency ?? "INR")}</p>
                     </div>
                   </div>
                 ))

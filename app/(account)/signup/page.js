@@ -11,11 +11,13 @@ export const metadata = {
   title: "Sign up",
 };
 
-export default async function SignupPage() {
+export default async function SignupPage({ searchParams }) {
   const session = await getSessionSnapshot();
+  const resolvedSearchParams = await searchParams;
+  const nextPath = typeof resolvedSearchParams?.next === "string" && resolvedSearchParams.next.startsWith("/") ? resolvedSearchParams.next : "/account";
 
   if (session.user) {
-    redirect("/account");
+    redirect(nextPath);
   }
 
   return (
@@ -29,9 +31,9 @@ export default async function SignupPage() {
             <p className="mt-4 text-sm leading-8 text-contrast-muted sm:text-base">
               Join the storefront to save your profile, prepare for future order history, and build a smoother premium shopping journey.
             </p>
-            <AuthForm mode="signup" />
+            <AuthForm mode="signup" redirectTo={nextPath} />
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <Button href="/login" variant="outline">
+              <Button href={nextPath === "/account" ? "/login" : `/login?next=${encodeURIComponent(nextPath)}`} variant="outline">
                 Already have an account
               </Button>
               <Button href="/shop" variant="ghost">

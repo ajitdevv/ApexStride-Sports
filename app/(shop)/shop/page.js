@@ -5,7 +5,7 @@ import { SectionShell } from "@/components/shared/section-shell";
 import { SiteFooter } from "@/components/shared/site-footer";
 import { SiteHeader } from "@/components/shared/site-header";
 import { ProductCardPlaceholder } from "@/components/storefront/product-card-placeholder";
-import { getStorefrontSnapshot } from "@/lib/catalog";
+import { getCategoryHref, getStorefrontSnapshot } from "@/lib/catalog";
 
 function getSingleSearchParam(value) {
   if (typeof value === "string") {
@@ -64,7 +64,7 @@ function getEmptyMessage({ query, categoryName }) {
     return `No active products are available in ${categoryName} yet. Try another category or browse the full catalog.`;
   }
 
-  return "No active products are available yet. Add products in Supabase to publish the storefront catalog.";
+  return "No products are available right now. Please check back soon for new arrivals.";
 }
 
 function ShopSearchForm({ defaultQuery, activeCategory }) {
@@ -87,7 +87,7 @@ function ShopSearchForm({ defaultQuery, activeCategory }) {
           type="submit"
           className="inline-flex h-12 items-center justify-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-[0_18px_35px_rgba(20,71,230,0.18)] transition hover:opacity-95"
         >
-          Search catalog
+          Search
         </button>
       </div>
       {defaultQuery || activeCategory ? (
@@ -113,7 +113,7 @@ function CategoryFilterLinks({ categories, activeCategorySlug, activeQuery }) {
         href={buildShopHref({ query: activeQuery })}
         className={
           activeCategorySlug
-            ? "rounded-full border border-border bg-background/88 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-contrast-muted transition hover:border-primary/25 hover:text-primary"
+            ? "rounded-full border border-border bg-background/88 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-foreground/72 transition hover:border-primary/25 hover:text-primary"
             : "rounded-full bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary-foreground shadow-[0_12px_24px_rgba(20,71,230,0.18)]"
         }
       >
@@ -125,11 +125,11 @@ function CategoryFilterLinks({ categories, activeCategorySlug, activeQuery }) {
         return (
           <Link
             key={category.slug}
-            href={buildShopHref({ query: activeQuery, category: category.slug })}
+            href={getCategoryHref(category.slug)}
             className={
               isActive
                 ? "rounded-full bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary-foreground shadow-[0_12px_24px_rgba(20,71,230,0.18)]"
-                : "rounded-full border border-border bg-background/88 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-contrast-muted transition hover:border-primary/25 hover:text-primary"
+                : "rounded-full border border-border bg-background/88 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-foreground/78 transition hover:border-primary/25 hover:text-primary"
             }
           >
             {category.name}
@@ -168,21 +168,21 @@ export default async function ShopPage({ searchParams }) {
           <div className="rounded-4xl border surface-card bg-white/94 p-8 card-shadow sm:p-10">
             <BadgePill>{query || activeCategory ? "Search the catalog" : "Live product catalog"}</BadgePill>
             <h1 className="mt-5 text-4xl font-semibold tracking-tight text-foreground">Shop performance accessories</h1>
-            <p className="mt-4 max-w-3xl text-sm leading-8 text-contrast-muted sm:text-base">
+            <p className="mt-4 max-w-3xl text-sm leading-8 text-foreground/78 sm:text-base">
               Search and browse the active storefront assortment across recovery, hydration, and training support from one linkable catalog view.
             </p>
             <ShopSearchForm defaultQuery={query} activeCategory={activeCategory} />
             {categories.length ? (
               <CategoryFilterLinks categories={categories} activeCategorySlug={activeCategory?.slug ?? ""} activeQuery={query} />
             ) : (
-              <div className="mt-8 rounded-3xl border border-dashed border-border/80 bg-background/78 p-5 text-sm leading-7 text-contrast-muted">
-                No active categories are available yet. Add categories in Supabase to organize the storefront.
+              <div className="mt-8 rounded-3xl border border-dashed border-border/80 bg-background/78 p-5 text-sm leading-7 text-foreground/78">
+                No categories are available right now. Please browse the full catalog below.
               </div>
             )}
             <div className="mt-6 flex flex-col gap-3 rounded-3xl border border-border/70 bg-background/82 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-sm font-medium text-foreground">{resultsMessage}</p>
               {query || activeCategory ? (
-                <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-contrast-muted">
+                <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-foreground/78">
                   <X className="h-3.5 w-3.5" />
                   Filters are active
                 </div>
@@ -196,7 +196,7 @@ export default async function ShopPage({ searchParams }) {
               ))}
             </div>
           ) : (
-            <div className="mt-10 rounded-[1.75rem] border border-dashed border-border/80 bg-white/92 p-8 text-sm leading-7 text-contrast-muted">
+            <div className="mt-10 rounded-[1.75rem] border border-dashed border-border/80 bg-white/92 p-8 text-sm leading-7 text-foreground/78">
               {emptyMessage}
             </div>
           )}

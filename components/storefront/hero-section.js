@@ -29,7 +29,7 @@ export function HeroSection() {
           <h1 className="mt-6 max-w-4xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             {siteConfig.hero.title}
           </h1>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-contrast-muted sm:text-lg">
+          <p className="mt-6 max-w-2xl text-base leading-8 text-foreground/78 sm:text-lg">
             {siteConfig.hero.description}
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -56,17 +56,17 @@ export function HeroSection() {
       </div>
       <div className="grid gap-4 sm:gap-5">
         <article className="rounded-[1.75rem] border border-white/12 bg-[#0f172a] p-6 text-white card-shadow sm:p-7">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/80">Featured store benefits</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/88">Featured store benefits</p>
           <h2 className="mt-4 text-2xl font-semibold tracking-tight">Designed for faster product decisions.</h2>
-          <p className="mt-3 text-sm leading-7 text-white/84">
+          <p className="mt-3 text-sm leading-7 text-white/90">
             Shop premium accessories with clearer product focus, stronger category organization, and a smoother path from browsing to checkout.
           </p>
-          <div className="mt-6 grid gap-3 text-sm text-white/82">
+          <div className="mt-6 grid gap-3 text-sm text-white/88">
             {siteConfig.metrics.map((metric) => (
               <div key={metric.label} className="rounded-2xl border border-white/12 bg-white/10 px-4 py-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/75">{metric.label}</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/90">{metric.label}</p>
                 <p className="mt-2 text-2xl font-semibold tracking-tight text-white">{metric.value}</p>
-                <p className="mt-2 leading-6 text-white/82">{metric.detail}</p>
+                <p className="mt-2 leading-6 text-white/88">{metric.detail}</p>
               </div>
             ))}
           </div>
@@ -74,7 +74,7 @@ export function HeroSection() {
         <article className="rounded-[1.75rem] border surface-card bg-white/94 p-6 shadow-[0_20px_40px_rgba(15,23,42,0.08)] backdrop-blur-sm sm:p-7">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Shopping support</p>
           <h2 className="mt-4 text-2xl font-semibold tracking-tight text-foreground">Build your routine faster.</h2>
-          <p className="mt-3 text-sm leading-7 text-contrast-muted">
+          <p className="mt-3 text-sm leading-7 text-foreground/78">
             Start with recovery, hydration, or training support and move straight into products that match your next session.
           </p>
           <Button className="mt-6" href="/shop" variant="secondary">

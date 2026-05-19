@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCart } from "@/components/cart/cart-provider";
+import { useOptionalCart } from "@/components/cart/cart-provider";
 import { cn } from "@/lib/utils/cn";
 
 export function CartNavLink() {
   const pathname = usePathname();
-  const { hydrated, itemCount } = useCart();
+  const { hydrated, itemCount } = useOptionalCart();
   const isActive = pathname.startsWith("/cart");
 
   return (
@@ -17,7 +17,7 @@ export function CartNavLink() {
         "rounded-full px-4 py-2 text-sm font-semibold transition",
         isActive
           ? "bg-primary text-primary-foreground shadow-[0_12px_24px_rgba(20,71,230,0.18)]"
-          : "text-muted-foreground hover:bg-white/90 hover:text-foreground"
+          : "text-foreground/78 hover:bg-white/90 hover:text-foreground"
       )}
     >
       Cart{hydrated && itemCount ? ` (${itemCount})` : ""}

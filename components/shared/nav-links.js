@@ -19,7 +19,7 @@ export function NavLinks({ items, className, stacked = false, tone = "light" }) 
         const inactiveClasses =
           tone === "dark"
             ? "text-slate-200 hover:bg-white/10 hover:text-white"
-            : "text-muted-foreground hover:bg-white/90 hover:text-foreground";
+            : "text-foreground/78 hover:bg-white/90 hover:text-foreground";
 
         const activeClasses =
           tone === "dark"

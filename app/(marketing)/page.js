@@ -7,7 +7,7 @@ import { SiteHeader } from "@/components/shared/site-header";
 import { BadgePill } from "@/components/shared/badge-pill";
 import { SectionShell } from "@/components/shared/section-shell";
 import { Button } from "@/components/ui/button";
-import { getStorefrontSnapshot } from "@/lib/catalog";
+import { getCategoryHref, getStorefrontSnapshot } from "@/lib/catalog";
 
 const shoppingBenefits = [
   {
@@ -44,7 +44,7 @@ export default async function MarketingHomePage() {
                   <benefit.icon className="h-5 w-5" />
                 </div>
                 <h2 className="mt-4 text-lg font-semibold text-foreground">{benefit.title}</h2>
-                <p className="mt-2 text-sm leading-7 text-contrast-muted">{benefit.description}</p>
+                <p className="mt-2 text-sm leading-7 text-foreground/78">{benefit.description}</p>
               </article>
             ))}
           </div>
@@ -58,7 +58,7 @@ export default async function MarketingHomePage() {
                 Start with the gear you need most.
               </h2>
             </div>
-            <p className="max-w-2xl text-sm leading-7 text-contrast-muted">
+            <p className="max-w-2xl text-sm leading-7 text-foreground/78">
               Move straight into recovery, hydration, and training support with focused shopping paths built around real buying intent.
             </p>
           </div>
@@ -67,25 +67,37 @@ export default async function MarketingHomePage() {
               categories.map((category) => (
                 <Link
                   key={category.slug}
-                  href={`/shop?category=${category.slug}`}
-                  className="rounded-[1.75rem] border surface-card bg-linear-to-br from-white via-white to-[#f4f8ff] p-6 card-shadow transition hover:-translate-y-1 hover:shadow-[0_24px_48px_rgba(15,23,42,0.10)]"
+                  href={getCategoryHref(category.slug)}
+                  className={`group relative overflow-hidden rounded-[1.75rem] border surface-card bg-linear-to-br ${category.cardBackgroundClass} p-6 card-shadow transition hover:-translate-y-1 hover:shadow-[0_24px_48px_rgba(15,23,42,0.10)]`}
                 >
-                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">{category.name}</p>
-                  <h3 className="mt-4 text-2xl font-semibold tracking-tight text-foreground">
-                    {category.description || `${category.name} essentials`}
-                  </h3>
-                  <p className="mt-4 text-sm leading-7 text-contrast-muted">
-                    Explore products selected for the {category.name.toLowerCase()} journey.
-                  </p>
-                  <span className="mt-6 inline-flex items-center text-sm font-semibold text-primary">
-                    Shop category
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </span>
+                  <div className="absolute inset-x-0 top-0 h-36 bg-linear-to-b from-white/55 via-transparent to-transparent" />
+                  <div className="absolute -right-8 top-8 h-28 w-28 rounded-full bg-white/45 blur-2xl transition group-hover:scale-110" />
+                  <div className="absolute -left-6 bottom-4 h-24 w-24 rounded-full bg-white/35 blur-2xl transition group-hover:scale-110" />
+                  <div className="relative flex min-h-[18rem] flex-col justify-between">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary/90">{category.cardEyebrow}</p>
+                      <h3 className="mt-4 text-3xl font-semibold tracking-tight text-foreground">{category.name}</h3>
+                      <p className="mt-4 max-w-xs text-sm leading-7 text-foreground/78">{category.description || `${category.name} essentials`}</p>
+                    </div>
+                    <div>
+                      <div className="grid gap-2 sm:grid-cols-3 md:grid-cols-1">
+                        {category.highlights.map((item) => (
+                          <div key={item} className="rounded-2xl border border-white/70 bg-white/72 px-4 py-3 text-sm font-semibold text-foreground shadow-sm backdrop-blur-sm">
+                            {item}
+                          </div>
+                        ))}
+                      </div>
+                      <span className="mt-6 inline-flex items-center text-sm font-semibold text-primary">
+                        Shop category
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </span>
+                    </div>
+                  </div>
                 </Link>
               ))
             ) : (
-              <article className="rounded-[1.75rem] border border-dashed border-border/80 bg-white/94 p-6 text-sm leading-7 text-contrast-muted md:col-span-3">
-                No active categories are available yet. Add categories in Supabase to feature them on the homepage.
+              <article className="rounded-[1.75rem] border border-dashed border-border/80 bg-white/94 p-6 text-sm leading-7 text-foreground/78 md:col-span-3">
+                Categories will appear here as they become available.
               </article>
             )}
           </div>
@@ -99,7 +111,7 @@ export default async function MarketingHomePage() {
                 <h2 className="mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
                   Shop the products leading the storefront.
                 </h2>
-                <p className="mt-4 max-w-3xl text-sm leading-7 text-contrast-muted sm:text-base">
+                <p className="mt-4 max-w-3xl text-sm leading-7 text-foreground/78 sm:text-base">
                   Discover the products highlighted for athletes who want cleaner design, dependable utility, and faster decisions.
                 </p>
               </div>
@@ -112,8 +124,8 @@ export default async function MarketingHomePage() {
               {featuredProducts.length ? (
                 featuredProducts.map((product) => <ProductCardPlaceholder key={product.slug} product={product} />)
               ) : (
-                <article className="rounded-[1.75rem] border border-dashed border-border/80 bg-white/94 p-6 text-sm leading-7 text-contrast-muted lg:col-span-3">
-                  No featured products are published yet. Mark products as featured in Supabase to highlight them here.
+                <article className="rounded-[1.75rem] border border-dashed border-border/80 bg-white/94 p-6 text-sm leading-7 text-foreground/78 lg:col-span-3">
+                  Featured products will appear here as they become available.
                 </article>
               )}
             </div>

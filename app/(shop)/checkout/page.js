@@ -2,12 +2,15 @@ import { CheckoutPageClient } from "@/components/storefront/checkout-page-client
 import { SectionShell } from "@/components/shared/section-shell";
 import { SiteFooter } from "@/components/shared/site-footer";
 import { SiteHeader } from "@/components/shared/site-header";
+import { requireAuthenticatedUser } from "@/lib/supabase/auth";
 
 export const metadata = {
   title: "Checkout",
 };
 
 export default async function CheckoutPage({ searchParams }) {
+  await requireAuthenticatedUser("/checkout");
+
   const resolvedSearchParams = await searchParams;
   const currentStatus = typeof resolvedSearchParams?.status === "string" ? resolvedSearchParams.status : "idle";
   const orderNumber = typeof resolvedSearchParams?.order === "string" ? resolvedSearchParams.order : "";

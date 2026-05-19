@@ -44,6 +44,16 @@ export async function POST(request) {
     );
   }
 
+  if (!session.user) {
+    return NextResponse.json(
+      {
+        error: "Please log in to continue checkout.",
+        loginUrl: "/login?next=%2Fcheckout",
+      },
+      { status: 401 }
+    );
+  }
+
   const body = await request.json().catch(() => null);
   const cartItems = normalizeCartItems(body?.items);
 
@@ -56,15 +66,13 @@ export async function POST(request) {
     );
   }
 
-  const profileId = session.user?.id
-    ? (
-        await supabaseAdmin
-          .from("profiles")
-          .select("id")
-          .eq("id", session.user.id)
-          .maybeSingle()
-      ).data?.id ?? null
-    : null;
+  const profileId = (
+    await supabaseAdmin
+      .from("profiles")
+      .select("id")
+      .eq("id", session.user.id)
+      .maybeSingle()
+  ).data?.id ?? null;
 
   const productSlugs = [...new Set(cartItems.map((item) => item.slug))];
   const { data: products, error: productsError } = await supabaseAdmin

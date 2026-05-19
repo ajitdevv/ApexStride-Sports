@@ -4,13 +4,13 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { accountNavigation, mainNavigation } from "@/lib/config/navigation";
-import { useCart } from "@/components/cart/cart-provider";
+import { useOptionalCart } from "@/components/cart/cart-provider";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils/cn";
 
 export function MobileNav({ isAdmin, isAuthenticated, primaryCta }) {
   const [isOpen, setIsOpen] = useState(false);
-  const { hydrated, itemCount } = useCart();
+  const { hydrated, itemCount } = useOptionalCart();
 
   const authItems = isAuthenticated
     ? [{ label: "Account", href: "/account" }, ...(isAdmin ? [{ label: "Admin Panel", href: "/admin" }] : [])]

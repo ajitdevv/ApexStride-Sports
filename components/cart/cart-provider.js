@@ -7,6 +7,16 @@ const cartChangeEvent = "apexstride-cart-change";
 const emptyCartItems = [];
 let cachedSerializedCart = null;
 let cachedCartItems = emptyCartItems;
+const emptyCartContext = {
+  items: emptyCartItems,
+  hydrated: false,
+  itemCount: 0,
+  subtotal: 0,
+  addItem: () => {},
+  updateQuantity: () => {},
+  removeItem: () => {},
+  clearCart: () => {},
+};
 const CartContext = createContext(null);
 
 function normalizeQuantity(quantity) {
@@ -206,4 +216,8 @@ export function useCart() {
   }
 
   return context;
+}
+
+export function useOptionalCart() {
+  return useContext(CartContext) ?? emptyCartContext;
 }
