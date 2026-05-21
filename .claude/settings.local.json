@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls \"/mnt/c/officework/ApexStride Sports/.claude/worktrees/agent-af5480294319c00d8\")",
+      "Read(//mnt/c/officework/ApexStride Sports/.claude/worktrees/**)",
+      "Bash(node --input-type=module -e \"import { createClient } from '@supabase/supabase-js'; import fs from 'node:fs'; const env = Object.fromEntries\\(fs.readFileSync\\('.env.local','utf8'\\).split\\(/\\\\r?\\\\n/\\).filter\\(Boolean\\).filter\\(line => !line.startsWith\\('#'\\)\\).map\\(line => { const i = line.indexOf\\('='\\); return [line.slice\\(0,i\\), line.slice\\(i+1\\)]; }\\)\\); const supabase = createClient\\(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY\\); const { data, error } = await supabase.from\\('products'\\).select\\('id,name,slug,status,image_link,product_images\\(id,storage_path,is_primary,sort_order\\)'\\).eq\\('status','active'\\).limit\\(10\\); if \\(error\\) { console.error\\(error\\); process.exit\\(1\\); } console.log\\(JSON.stringify\\(data, null, 2\\)\\);\")",
+      "Bash(\"C:/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --window-size=390,844 --virtual-time-budget=6000 --screenshot=\"C:/Users/C2/AppData/Local/Temp/apex-home-mobile.png\" \"http://localhost:3000/\")",
+      "Bash(\"C:/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --window-size=390,844 --virtual-time-budget=6000 --screenshot=\"C:/Users/C2/AppData/Local/Temp/apex-account-mobile.png\" \"http://localhost:3000/account\")",
+      "Bash(\"C:/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --window-size=390,844 --virtual-time-budget=6000 --screenshot=\"C:/Users/C2/AppData/Local/Temp/apex-admin-mobile.png\" \"http://localhost:3000/admin\")"
+    ]
+  }
+}

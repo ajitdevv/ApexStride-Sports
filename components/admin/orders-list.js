@@ -35,47 +35,47 @@ function getStatusTone(status) {
 export function OrdersList({ orders }) {
   if (!orders.length) {
     return (
-      <section className="rounded-4xl border border-white/12 bg-white/8 p-6 text-sm leading-7 text-dark-muted backdrop-blur-xl sm:p-8">
+      <section className="rounded-4xl border border-white/12 bg-white/8 p-5 text-sm leading-6 text-dark-muted backdrop-blur-xl sm:p-6">
         No orders are available yet. Completed checkout attempts will appear here for admin review.
       </section>
     );
   }
 
   return (
-    <section className="grid gap-4 xl:gap-5">
+    <section className="grid gap-3.5 xl:gap-4">
       {orders.map((order) => (
-        <article key={order.id} className="rounded-4xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl sm:p-6">
-          <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
+        <article key={order.id} className="rounded-4xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl sm:p-5">
+          <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
             <div className="min-w-0 flex-1">
-              <div className="flex flex-col gap-4 border-b border-white/10 pb-5 lg:flex-row lg:items-start lg:justify-between">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-200">{order.order_number}</p>
-                  <h2 className="mt-3 text-2xl font-semibold tracking-tight text-white">{formatCustomer(order)}</h2>
-                  <p className="mt-2 text-sm leading-7 text-dark-muted">
+              <div className="flex flex-col gap-3.5 border-b border-white/10 pb-4 lg:flex-row lg:items-start lg:justify-between">
+                <div className="min-w-0-safe">
+                  <p className="text-wrap-safe text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-200 sm:text-xs sm:tracking-[0.24em]">{order.order_number}</p>
+                  <h2 className="text-wrap-safe mt-2 text-xl font-semibold tracking-tight text-white sm:mt-3 sm:text-2xl">{formatCustomer(order)}</h2>
+                  <p className="mt-2 text-sm leading-6 text-dark-muted">
                     {order.profile_id ? "Authenticated checkout" : "Guest checkout"} · {order.payment_provider || "Payment provider pending"}
                   </p>
                 </div>
-                <div className={`inline-flex items-center justify-center rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] ${getStatusTone(order.status)}`}>
+                <div className={`inline-flex items-center justify-center self-start rounded-full border px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] sm:px-4 sm:py-2 sm:text-xs sm:tracking-[0.18em] ${getStatusTone(order.status)}`}>
                   {order.status}
                 </div>
               </div>
 
-              <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-                <div className="rounded-[1.3rem] border border-white/10 bg-[#0d1b30] px-4 py-3">
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">Total</span>
-                  <p className="mt-2 text-base font-semibold text-white">{formatPrice(Number(order.total_amount ?? 0), order.currency ?? "INR")}</p>
+              <div className="mt-4 grid gap-2.5 sm:grid-cols-2 xl:grid-cols-4">
+                <div className="rounded-[1.1rem] border border-white/10 bg-[#0d1b30] px-3.5 py-3">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-400">Total</span>
+                  <p className="mt-1.5 text-base font-semibold text-white">{formatPrice(Number(order.total_amount ?? 0), order.currency ?? "INR")}</p>
                 </div>
-                <div className="rounded-[1.3rem] border border-white/10 bg-[#0d1b30] px-4 py-3">
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">Placed</span>
-                  <p className="mt-2 text-sm font-semibold leading-6 text-white">{formatTimestamp(order.placed_at ?? order.created_at)}</p>
+                <div className="rounded-[1.1rem] border border-white/10 bg-[#0d1b30] px-3.5 py-3">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-400">Placed</span>
+                  <p className="mt-1.5 text-sm font-semibold leading-6 text-white">{formatTimestamp(order.placed_at ?? order.created_at)}</p>
                 </div>
-                <div className="rounded-[1.3rem] border border-white/10 bg-[#0d1b30] px-4 py-3">
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">Reference</span>
-                  <p className="mt-2 text-sm font-semibold leading-6 text-white">{order.payment_reference || "Pending"}</p>
+                <div className="rounded-[1.1rem] border border-white/10 bg-[#0d1b30] px-3.5 py-3">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-400">Reference</span>
+                  <p className="text-wrap-safe mt-1.5 text-sm font-semibold leading-6 text-white">{order.payment_reference || "Pending"}</p>
                 </div>
-                <div className="rounded-[1.3rem] border border-white/10 bg-[#0d1b30] px-4 py-3">
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">Customer type</span>
-                  <p className="mt-2 text-sm font-semibold leading-6 text-white">{order.profile_id ? "Authenticated" : "Guest"}</p>
+                <div className="rounded-[1.1rem] border border-white/10 bg-[#0d1b30] px-3.5 py-3">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-400">Customer type</span>
+                  <p className="mt-1.5 text-sm font-semibold leading-6 text-white">{order.profile_id ? "Authenticated" : "Guest"}</p>
                 </div>
               </div>
             </div>
@@ -85,24 +85,24 @@ export function OrdersList({ orders }) {
             </div>
           </div>
 
-          <div className="mt-5 rounded-[1.6rem] border border-white/10 bg-[#0d1b30] p-5">
-            <div className="flex flex-col gap-2 border-b border-white/10 pb-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="mt-4 rounded-[1.35rem] border border-white/10 bg-[#0d1b30] p-4 sm:p-5">
+            <div className="flex flex-col gap-2 border-b border-white/10 pb-3.5 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <p className="text-sm font-semibold text-white">Order items</p>
                 <p className="mt-1 text-sm leading-6 text-dark-muted">A focused view of every line attached to this order.</p>
               </div>
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-400 sm:text-xs sm:tracking-[0.18em]">
                 {order.order_items?.length ?? 0} line item{order.order_items?.length === 1 ? "" : "s"}
               </p>
             </div>
 
-            <div className="mt-4 grid gap-3 text-sm text-slate-300">
+            <div className="mt-3.5 grid gap-2.5 text-sm text-slate-300">
               {order.order_items?.length ? (
                 order.order_items.map((item) => (
-                  <div key={item.id} className="flex flex-col gap-3 rounded-[1.3rem] border border-white/10 bg-white/5 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
-                    <div className="min-w-0">
-                      <p className="font-medium text-white">{item.product_name}</p>
-                      <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-slate-400">{item.variant_title || "Catalog item"}</p>
+                  <div key={item.id} className="flex flex-col gap-2.5 rounded-[1.1rem] border border-white/10 bg-white/5 px-3.5 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-4">
+                    <div className="min-w-0-safe">
+                      <p className="text-wrap-safe font-medium text-white">{item.product_name}</p>
+                      <p className="text-wrap-safe mt-1 text-[11px] uppercase tracking-[0.16em] text-slate-400 sm:tracking-[0.18em]">{item.variant_title || "Catalog item"}</p>
                     </div>
                     <div className="grid gap-1 text-sm sm:text-right">
                       <p>Qty: {item.quantity}</p>

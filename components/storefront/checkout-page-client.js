@@ -83,13 +83,13 @@ export function CheckoutPageClient({ currentStatus, orderNumber }) {
   const canCheckout = hydrated && items.length > 0 && currentStatus !== "success";
 
   return (
-    <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-      <section className="rounded-4xl border surface-card bg-white/95 p-8 card-shadow sm:p-10">
-        <BadgePill>{content.badge}</BadgePill>
-        <h1 className="mt-5 text-4xl font-semibold tracking-tight text-foreground">{content.title}</h1>
-        <p className="mt-4 max-w-3xl text-sm leading-8 text-foreground/78 sm:text-base">{content.description}</p>
+    <div className="mx-auto grid max-w-6xl gap-5 lg:grid-cols-[1.05fr_0.95fr]">
+      <section className="rounded-4xl border surface-card bg-white/95 p-5 card-shadow sm:p-7">
+        <BadgePill className="eyebrow-spacing">{content.badge}</BadgePill>
+        <h1 className="section-title mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">{content.title}</h1>
+        <p className="support-copy mt-3 max-w-3xl text-sm text-foreground/78 sm:text-base">{content.description}</p>
 
-        <div className={`mt-6 rounded-[1.6rem] border p-4 text-sm ${getStatusPanelClass(content.tone)}`}>
+        <div className={`text-wrap-safe mt-5 rounded-[1.4rem] border p-3.5 text-sm sm:p-4 ${getStatusPanelClass(content.tone)}`}>
           {orderNumber ? (
             <p>
               Order reference: <span className="font-semibold">{orderNumber}</span>
@@ -103,13 +103,13 @@ export function CheckoutPageClient({ currentStatus, orderNumber }) {
           ) : null}
         </div>
 
-        <div className="mt-8 grid gap-3">
+        <div className="mt-5 grid gap-2.5">
           {checkoutHighlights.map((item) => (
-            <div key={item.title} className="flex gap-4 rounded-[1.5rem] border border-border/70 bg-background/88 p-4">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-secondary text-primary">
-                <item.icon className="h-5 w-5" />
+            <div key={item.title} className="flex gap-3 rounded-[1.25rem] border border-border/70 bg-background/88 p-3.5 sm:gap-4 sm:p-4">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[1rem] bg-secondary text-primary sm:h-11 sm:w-11 sm:rounded-2xl">
+                <item.icon className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
               </span>
-              <div>
+              <div className="min-w-0-safe">
                 <p className="text-sm font-semibold text-foreground">{item.title}</p>
                 <p className="mt-1 text-sm leading-6 text-foreground/78">{item.description}</p>
               </div>
@@ -118,25 +118,25 @@ export function CheckoutPageClient({ currentStatus, orderNumber }) {
         </div>
       </section>
 
-      <aside className="rounded-4xl border surface-card bg-white/95 p-8 card-shadow sm:p-10">
-        <BadgePill>Order summary</BadgePill>
-        <h2 className="mt-5 text-3xl font-semibold tracking-tight text-foreground">Final cart review</h2>
-        <p className="mt-4 text-sm leading-7 text-foreground/78">
+      <aside className="rounded-4xl border surface-card bg-white/95 p-5 card-shadow sm:p-7">
+        <BadgePill className="eyebrow-spacing">Order summary</BadgePill>
+        <h2 className="section-title mt-4 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">Final cart review</h2>
+        <p className="mt-3 text-sm leading-6 text-foreground/78">
           Razorpay opens for the exact subtotal shown here after the server confirms the active products in your cart.
         </p>
 
         {hydrated && items.length ? (
-          <div className="mt-8 rounded-[1.8rem] border border-border/70 bg-linear-to-br from-white via-white to-[#f3f8ff] p-5">
-            <div className="grid gap-3 text-sm text-foreground/78">
+          <div className="mt-5 rounded-[1.45rem] border border-border/70 bg-linear-to-br from-white via-white to-[#f3f8ff] p-4 sm:p-5">
+            <div className="grid gap-2.5 text-sm text-foreground/78">
               {items.map((item) => (
-                <div key={item.slug} className="flex items-start justify-between gap-4 rounded-[1.35rem] border border-border/70 bg-background/84 px-4 py-3">
-                  <div>
-                    <p className="font-semibold text-foreground">{item.name}</p>
-                    <p className="mt-1 text-xs uppercase tracking-[0.18em] text-foreground/62">
+                <div key={item.slug} className="flex items-start justify-between gap-3 rounded-[1.15rem] border border-border/70 bg-background/84 px-3.5 py-3 sm:px-4">
+                  <div className="min-w-0-safe">
+                    <p className="text-wrap-safe font-semibold text-foreground">{item.name}</p>
+                    <p className="mt-1 text-[11px] uppercase tracking-[0.16em] text-foreground/62 sm:text-xs sm:tracking-[0.18em]">
                       {item.quantity} × {formatPrice(item.basePrice, item.currency)}
                     </p>
                   </div>
-                  <span className="font-semibold text-foreground">{formatPrice(item.basePrice * item.quantity, item.currency)}</span>
+                  <span className="shrink-0 font-semibold text-foreground">{formatPrice(item.basePrice * item.quantity, item.currency)}</span>
                 </div>
               ))}
             </div>
@@ -146,23 +146,23 @@ export function CheckoutPageClient({ currentStatus, orderNumber }) {
                 <span>Cart items</span>
                 <span className="font-semibold text-foreground">{itemCount}</span>
               </div>
-              <div className="mt-3 flex items-end justify-between gap-4">
+              <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground/62">Total due now</p>
-                  <p className="mt-2 text-3xl font-semibold tracking-tight text-foreground">{formatPrice(subtotal, currency)}</p>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground/62">Total due now</p>
+                  <p className="mt-1.5 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">{formatPrice(subtotal, currency)}</p>
                 </div>
                 {currentStatus === "success" ? (
-                  <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-emerald-800">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-emerald-800 sm:py-2 sm:text-xs">
                     <BadgeCheck className="h-3.5 w-3.5" />
                     Paid
                   </span>
                 ) : currentStatus === "failed" ? (
-                  <span className="inline-flex items-center gap-2 rounded-full border border-rose-200 bg-rose-50 px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-rose-800">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-rose-200 bg-rose-50 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-rose-800 sm:py-2 sm:text-xs">
                     <AlertTriangle className="h-3.5 w-3.5" />
                     Retry available
                   </span>
                 ) : (
-                  <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-emerald-800">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-emerald-800 sm:py-2 sm:text-xs">
                     <ShieldCheck className="h-3.5 w-3.5" />
                     Secure review
                   </span>
@@ -171,12 +171,12 @@ export function CheckoutPageClient({ currentStatus, orderNumber }) {
             </div>
           </div>
         ) : (
-          <div className="mt-8 rounded-[1.8rem] border border-dashed border-border/80 bg-background/78 p-5 text-sm leading-7 text-foreground/78">
+          <div className="mt-5 rounded-[1.45rem] border border-dashed border-border/80 bg-background/78 p-4 text-sm leading-6 text-foreground/78 sm:p-5">
             {hydrated ? "Your cart is empty. Add products before starting checkout." : "We are restoring your cart before checkout."}
           </div>
         )}
 
-        <div className="mt-8 flex flex-col gap-3">
+        <div className="mt-5 flex flex-col gap-2.5">
           <RazorpayCheckoutButton canCheckout={canCheckout} items={items} />
           <Button href="/cart" variant="outline">
             Back to cart

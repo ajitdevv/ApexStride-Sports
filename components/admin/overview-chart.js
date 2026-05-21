@@ -106,40 +106,40 @@ export function AdminOverviewChart({ pendingOrders = 0, paidOrders = 0, fulfille
   };
 
   return (
-    <section className="rounded-4xl border border-white/12 bg-white/8 p-6 backdrop-blur-xl sm:p-8">
+    <section className="rounded-4xl border border-white/12 bg-white/8 p-5 backdrop-blur-xl sm:p-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-200">Dashboard status</p>
-          <h2 className="mt-3 text-2xl font-semibold tracking-tight text-white">Storefront readiness overview</h2>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-200 sm:text-xs sm:tracking-[0.24em]">Dashboard status</p>
+          <h2 className="mt-2.5 text-xl font-semibold tracking-tight text-white sm:text-2xl">Storefront readiness overview</h2>
         </div>
-        <p className="max-w-xl text-sm leading-7 text-dark-muted">
+        <p className="max-w-xl text-sm leading-6 text-dark-muted">
           Compare live order movement with current catalog visibility from one premium dashboard surface.
         </p>
       </div>
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
-        <div className="rounded-[1.75rem] border border-white/12 bg-[#0d1b30] p-4 text-sm text-dark-muted">
+      <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+        <div className="rounded-[1.35rem] border border-white/12 bg-[#0d1b30] p-3.5 text-sm text-dark-muted sm:p-4">
           <p className="font-semibold text-white">Pending payment</p>
-          <p className="mt-2 text-2xl font-semibold text-sky-200">{summary.pendingOrders}</p>
+          <p className="mt-1.5 text-xl font-semibold text-sky-200 sm:text-2xl">{summary.pendingOrders}</p>
         </div>
-        <div className="rounded-[1.75rem] border border-white/12 bg-[#0d1b30] p-4 text-sm text-dark-muted">
+        <div className="rounded-[1.35rem] border border-white/12 bg-[#0d1b30] p-3.5 text-sm text-dark-muted sm:p-4">
           <p className="font-semibold text-white">Paid orders</p>
-          <p className="mt-2 text-2xl font-semibold text-sky-200">{summary.paidOrders}</p>
+          <p className="mt-1.5 text-xl font-semibold text-sky-200 sm:text-2xl">{summary.paidOrders}</p>
         </div>
-        <div className="rounded-[1.75rem] border border-white/12 bg-[#0d1b30] p-4 text-sm text-dark-muted">
+        <div className="rounded-[1.35rem] border border-white/12 bg-[#0d1b30] p-3.5 text-sm text-dark-muted sm:p-4">
           <p className="font-semibold text-white">Fulfilled orders</p>
-          <p className="mt-2 text-2xl font-semibold text-sky-200">{summary.fulfilledOrders}</p>
+          <p className="mt-1.5 text-xl font-semibold text-sky-200 sm:text-2xl">{summary.fulfilledOrders}</p>
         </div>
-        <div className="rounded-[1.75rem] border border-white/12 bg-[#0d1b30] p-4 text-sm text-dark-muted">
+        <div className="rounded-[1.35rem] border border-white/12 bg-[#0d1b30] p-3.5 text-sm text-dark-muted sm:p-4">
           <p className="font-semibold text-white">Live categories</p>
-          <p className="mt-2 text-2xl font-semibold text-sky-200">{summary.categoryCount}</p>
+          <p className="mt-1.5 text-xl font-semibold text-sky-200 sm:text-2xl">{summary.categoryCount}</p>
         </div>
-        <div className="rounded-[1.75rem] border border-white/12 bg-[#0d1b30] p-4 text-sm text-dark-muted">
+        <div className="rounded-[1.35rem] border border-white/12 bg-[#0d1b30] p-3.5 text-sm text-dark-muted sm:p-4">
           <p className="font-semibold text-white">Visible products</p>
-          <p className="mt-2 text-2xl font-semibold text-sky-200">{summary.productCount}</p>
+          <p className="mt-1.5 text-xl font-semibold text-sky-200 sm:text-2xl">{summary.productCount}</p>
         </div>
       </div>
-      <div className="mt-8 rounded-[1.75rem] border border-white/10 bg-[#0d1b30] p-4 sm:p-5">
-        <div className="h-[320px] w-full">
+      <div className="mt-5 rounded-[1.35rem] border border-white/10 bg-[#0d1b30] p-3.5 sm:p-4">
+        <div className="h-[260px] w-full sm:h-[320px]">
           <Line data={buildChartData(summary)} options={buildChartOptions(summary)} />
         </div>
       </div>

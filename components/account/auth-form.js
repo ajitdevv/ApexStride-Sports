@@ -82,12 +82,12 @@ export function AuthForm({ mode, redirectTo = "/account" }) {
   }
 
   return (
-    <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
+    <form className="mt-6 space-y-3.5" onSubmit={handleSubmit}>
       {mode === "signup" ? (
         <label className="grid gap-2 text-sm font-medium text-foreground">
           Full name
           <input
-            className="h-12 rounded-2xl border border-border bg-white px-4 text-sm text-foreground outline-none transition focus:border-primary focus:ring-4 focus:ring-ring"
+            className="h-11 rounded-[1.15rem] border border-border bg-white px-4 text-sm text-foreground outline-none transition focus:border-primary focus:ring-4 focus:ring-ring sm:h-12 sm:rounded-2xl"
             onChange={(event) => setFullName(event.target.value)}
             placeholder="Enter your full name"
             required
@@ -100,7 +100,7 @@ export function AuthForm({ mode, redirectTo = "/account" }) {
       <label className="grid gap-2 text-sm font-medium text-foreground">
         Email
         <input
-          className="h-12 rounded-2xl border border-border bg-white px-4 text-sm text-foreground outline-none transition focus:border-primary focus:ring-4 focus:ring-ring"
+          className="h-11 rounded-[1.15rem] border border-border bg-white px-4 text-sm text-foreground outline-none transition focus:border-primary focus:ring-4 focus:ring-ring sm:h-12 sm:rounded-2xl"
           onChange={(event) => setEmail(event.target.value)}
           placeholder="you@example.com"
           required
@@ -112,7 +112,7 @@ export function AuthForm({ mode, redirectTo = "/account" }) {
       <label className="grid gap-2 text-sm font-medium text-foreground">
         Password
         <input
-          className="h-12 rounded-2xl border border-border bg-white px-4 text-sm text-foreground outline-none transition focus:border-primary focus:ring-4 focus:ring-ring"
+          className="h-11 rounded-[1.15rem] border border-border bg-white px-4 text-sm text-foreground outline-none transition focus:border-primary focus:ring-4 focus:ring-ring sm:h-12 sm:rounded-2xl"
           minLength={6}
           onChange={(event) => setPassword(event.target.value)}
           placeholder="Enter your password"
@@ -124,7 +124,7 @@ export function AuthForm({ mode, redirectTo = "/account" }) {
 
       {status.message ? (
         <div
-          className={`rounded-2xl border px-4 py-3 text-sm ${
+          className={`text-wrap-safe rounded-[1.15rem] border px-4 py-3 text-sm ${
             status.type === "error"
               ? "border-danger/20 bg-red-50 text-red-800"
               : "border-emerald-200 bg-emerald-50 text-emerald-900"
@@ -134,7 +134,7 @@ export function AuthForm({ mode, redirectTo = "/account" }) {
         </div>
       ) : null}
 
-      <Button className="w-full" disabled={isSubmitting} type="submit">
+      <Button className="mt-1 w-full" disabled={isSubmitting} type="submit">
         {isSubmitting ? "Please wait..." : messages.submit}
       </Button>
     </form>

@@ -69,6 +69,69 @@ body {
     radial-gradient(circle at top, rgba(14, 165, 233, 0.1), transparent 32%),
     linear-gradient(180deg, #f8fbff 0%, #f4f7fb 28%, #eff4fb 100%);
   color: var(--foreground);
+  text-wrap: pretty;
+}
+
+.text-dark-muted,
+.text-contrast-muted {
+  color: rgba(8, 17, 32, 0.72);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-wrap-safe {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.eyebrow-spacing + .hero-title,
+.eyebrow-spacing + .section-title {
+  margin-top: 1rem;
+}
+
+.hero-title {
+  line-height: 1.05;
+}
+
+.section-title {
+  line-height: 1.1;
+}
+
+.support-copy {
+  line-height: 1.75;
+}
+
+@media (max-width: 640px) {
+  .hero-title {
+    letter-spacing: -0.03em;
+  }
+
+  .section-title {
+    letter-spacing: -0.02em;
+  }
+
+  .support-copy {
+    line-height: 1.65;
+  }
+}
+
+@media (min-width: 641px) {
+  .eyebrow-spacing + .hero-title,
+  .eyebrow-spacing + .section-title {
+    margin-top: 1.25rem;
+  }
+}
+
+.min-w-0-safe {
+  min-width: 0;
+}
+
+@media (max-width: 480px) {
+  .mobile-stack-gap {
+    gap: 0.75rem;
+  }
 }
 
 ::selection {

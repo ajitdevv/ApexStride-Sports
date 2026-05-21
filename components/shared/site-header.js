@@ -15,13 +15,13 @@ export async function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/70 bg-background/88 backdrop-blur-xl">
-      <SectionShell className="relative flex min-h-20 items-center justify-between gap-4 py-3">
+      <SectionShell className="relative flex min-h-16 items-center justify-between gap-3 py-2.5 sm:min-h-[4.5rem] sm:gap-4 sm:py-3">
         <LogoMark />
-        <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center lg:gap-3">
+        <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center lg:gap-2.5">
           <NavLinks items={mainNavigation.filter((item) => item.href !== "/cart")} />
           <CartNavLink />
         </div>
-        <div className="hidden lg:flex lg:items-center lg:gap-3">
+        <div className="hidden lg:flex lg:items-center lg:gap-2.5">
           <NavLinks items={authItems} />
           {session.isAdmin ? <Button href="/admin" variant="outline">Admin Panel</Button> : null}
           <Button href={siteConfig.hero.primaryCta.href}>{siteConfig.hero.primaryCta.label}</Button>

@@ -104,53 +104,53 @@ export default async function AdminPage() {
   ];
 
   return (
-    <div className="grid gap-6 xl:gap-8">
-      <section className="hero-glow relative overflow-hidden rounded-4xl border border-white/10 bg-linear-to-br from-[#0f1e37] via-[#0c1830] to-[#09111f] p-7 surface-shadow sm:p-10">
-        <div className="absolute inset-x-0 top-0 h-40 bg-linear-to-b from-sky-400/12 via-transparent to-transparent" />
-        <div className="relative grid gap-6 xl:grid-cols-[1.1fr_0.9fr] xl:items-start">
+    <div className="grid gap-5 xl:gap-6">
+      <section className="hero-glow relative overflow-hidden rounded-4xl border border-white/10 bg-linear-to-br from-[#0f1e37] via-[#0c1830] to-[#09111f] p-5 surface-shadow sm:p-7">
+        <div className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-sky-400/12 via-transparent to-transparent sm:h-40" />
+        <div className="relative grid gap-5 xl:grid-cols-[1.1fr_0.9fr] xl:items-start">
           <div>
-            <BadgePill className="border-white/10 bg-white/10 text-sky-200">Admin dashboard</BadgePill>
-            <h1 className="mt-5 max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+            <BadgePill className="eyebrow-spacing border-white/10 bg-white/10 text-sky-200">Admin dashboard</BadgePill>
+            <h1 className="hero-title mt-4 max-w-3xl text-3xl font-semibold tracking-tight text-white sm:text-4xl">
               A clearer control center for orders, catalog health, and next actions.
             </h1>
-            <p className="mt-5 max-w-2xl text-sm leading-8 text-slate-300 sm:text-base">
+            <p className="support-copy mt-3 max-w-2xl text-sm text-slate-300 sm:text-base">
               Review live order activity, move between nested admin workspaces, and keep the storefront operation easier to scan from one premium dashboard.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <div className="mt-5 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
               <Link
                 href="/admin/orders"
-                className="inline-flex h-12 items-center justify-center rounded-full bg-sky-400 px-6 text-sm font-semibold text-slate-950 shadow-[0_18px_35px_rgba(56,189,248,0.26)] transition hover:bg-sky-300"
+                className="inline-flex h-11 items-center justify-center rounded-full bg-sky-400 px-5 text-sm font-semibold text-slate-950 shadow-[0_18px_35px_rgba(56,189,248,0.26)] transition hover:bg-sky-300 sm:h-12 sm:px-6"
               >
                 Open orders workspace
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
               <Link
                 href="/admin/catalog"
-                className="inline-flex h-12 items-center justify-center rounded-full border border-white/10 bg-white/10 px-6 text-sm font-semibold text-white transition hover:bg-white/14"
+                className="inline-flex h-11 items-center justify-center rounded-full border border-white/10 bg-white/10 px-5 text-sm font-semibold text-white transition hover:bg-white/14 sm:h-12 sm:px-6"
               >
                 Browse catalog sections
               </Link>
             </div>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <article className="rounded-[1.75rem] border border-white/10 bg-white/8 p-5 backdrop-blur-sm">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-200">Operational focus</p>
-              <p className="mt-4 text-2xl font-semibold tracking-tight text-white">Orders first, expansion ready.</p>
-              <p className="mt-3 text-sm leading-7 text-slate-300">
+          <div className="grid gap-3 sm:grid-cols-2">
+            <article className="rounded-[1.45rem] border border-white/10 bg-white/8 p-4 backdrop-blur-sm sm:p-5">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-200 sm:text-xs sm:tracking-[0.22em]">Operational focus</p>
+              <p className="mt-3 text-xl font-semibold tracking-tight text-white sm:text-2xl">Orders first, expansion ready.</p>
+              <p className="mt-2.5 text-sm leading-6 text-slate-300">
                 The admin area now prioritizes real order handling while making room for catalog, customers, and reporting.
               </p>
             </article>
-            <article className="rounded-[1.75rem] border border-white/10 bg-[#0d1b30] p-5 text-white card-shadow">
+            <article className="rounded-[1.45rem] border border-white/10 bg-[#0d1b30] p-4 text-white card-shadow sm:p-5">
               <div className="flex items-center gap-3">
-                <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-sky-200">
+                <span className="flex h-10 w-10 items-center justify-center rounded-[1rem] border border-white/10 bg-white/5 text-sky-200 sm:h-11 sm:w-11 sm:rounded-2xl">
                   <LayoutDashboard className="h-5 w-5" />
                 </span>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/60">Live readiness</p>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/60 sm:text-xs sm:tracking-[0.22em]">Live readiness</p>
                   <p className="mt-1 text-sm font-semibold">Nested navigation is now available.</p>
                 </div>
               </div>
-              <p className="mt-4 text-sm leading-7 text-white/75">
+              <p className="mt-3 text-sm leading-6 text-white/75">
                 Jump between admin sections from the left rail instead of relying on a flat placeholder dashboard.
               </p>
             </article>
@@ -158,40 +158,40 @@ export default async function AdminPage() {
         </div>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3" aria-label="Admin overview metrics">
+      <section className="grid gap-3.5 md:grid-cols-2 xl:grid-cols-3" aria-label="Admin overview metrics">
         {metrics.map((metric) => (
           <MetricCard key={metric.label} {...metric} />
         ))}
       </section>
 
-      <section className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
-        <div className="rounded-4xl border border-white/12 bg-white/8 p-6 backdrop-blur-xl sm:p-8">
+      <section className="grid gap-5 xl:grid-cols-[1.05fr_0.95fr]">
+        <div className="rounded-4xl border border-white/12 bg-white/8 p-5 backdrop-blur-xl sm:p-6">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-200">Quick actions</p>
-              <h2 className="mt-3 text-2xl font-semibold tracking-tight text-white">Move into the next workspace fast</h2>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-200 sm:text-xs sm:tracking-[0.24em]">Quick actions</p>
+              <h2 className="mt-2.5 text-xl font-semibold tracking-tight text-white sm:text-2xl">Move into the next workspace fast</h2>
             </div>
-            <p className="max-w-xl text-sm leading-7 text-dark-muted">
+            <p className="max-w-xl text-sm leading-6 text-dark-muted">
               Use the upgraded admin IA to move directly into the areas you need most.
             </p>
           </div>
-          <div className="mt-6 grid gap-4">
+          <div className="mt-5 grid gap-3">
             {quickActions.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="group rounded-[1.6rem] border border-white/10 bg-[#0d1b30] p-5 transition hover:border-sky-300/25 hover:bg-[#11203a]"
+                className="group rounded-[1.35rem] border border-white/10 bg-[#0d1b30] p-4 transition hover:border-sky-300/25 hover:bg-[#11203a] sm:p-5"
               >
-                <div className="flex items-start gap-4">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-sky-200 transition group-hover:bg-sky-400/14">
+                <div className="flex items-start gap-3.5 sm:gap-4">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-[1rem] border border-white/10 bg-white/5 text-sky-200 transition group-hover:bg-sky-400/14 sm:h-11 sm:w-11 sm:rounded-2xl">
                     <item.icon className="h-5 w-5" />
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between gap-3">
                       <p className="text-base font-semibold text-white">{item.label}</p>
-                      <ArrowRight className="h-4 w-4 text-slate-400 transition group-hover:text-sky-200" />
+                      <ArrowRight className="h-4 w-4 shrink-0 text-slate-400 transition group-hover:text-sky-200" />
                     </div>
-                    <p className="mt-2 text-sm leading-7 text-dark-muted">{item.description}</p>
+                    <p className="mt-1.5 text-sm leading-6 text-dark-muted">{item.description}</p>
                   </div>
                 </div>
               </Link>
@@ -199,99 +199,99 @@ export default async function AdminPage() {
           </div>
         </div>
 
-        <div className="rounded-4xl border border-white/12 bg-white/8 p-6 backdrop-blur-xl sm:p-8">
-          <div className="flex items-end justify-between gap-4">
+        <div className="rounded-4xl border border-white/12 bg-white/8 p-5 backdrop-blur-xl sm:p-6">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-200">Recent orders</p>
-              <h2 className="mt-3 text-2xl font-semibold tracking-tight text-white">Stay close to the live checkout queue</h2>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-200 sm:text-xs sm:tracking-[0.24em]">Recent orders</p>
+              <h2 className="mt-2.5 text-xl font-semibold tracking-tight text-white sm:text-2xl">Stay close to the live checkout queue</h2>
             </div>
-            <span className="rounded-full border border-white/10 bg-white/8 px-3 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">
+            <span className="self-start rounded-full border border-white/10 bg-white/8 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300 sm:py-2 sm:text-xs sm:tracking-[0.18em]">
               {orderSummary.recentOrders.length} visible
             </span>
           </div>
-          <div className="mt-6 grid gap-3 text-sm text-slate-300">
+          <div className="mt-5 grid gap-2.5 text-sm text-slate-300">
             {orderSummary.recentOrders.length ? (
               orderSummary.recentOrders.map((order) => (
-                <div key={order.id} className="rounded-[1.5rem] border border-white/10 bg-[#0d1b30] px-4 py-4">
+                <div key={order.id} className="rounded-[1.3rem] border border-white/10 bg-[#0d1b30] px-3.5 py-3.5 sm:px-4">
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                    <p className="font-semibold text-white">{order.order_number}</p>
+                    <p className="text-wrap-safe font-semibold text-white">{order.order_number}</p>
                     <BadgePill className="border-white/10 bg-white/5 text-sky-200">{order.status}</BadgePill>
                   </div>
-                  <p className="mt-3 text-sm leading-6 text-dark-muted">
+                  <p className="mt-2 text-sm leading-6 text-dark-muted">
                     {order.currency} {Number(order.total_amount ?? 0)}
                   </p>
                 </div>
               ))
             ) : (
-              <div className="rounded-[1.5rem] border border-white/10 bg-[#0d1b30] px-4 py-4 text-slate-300">No orders are available yet.</div>
+              <div className="rounded-[1.3rem] border border-white/10 bg-[#0d1b30] px-3.5 py-3.5 text-slate-300 sm:px-4">No orders are available yet.</div>
             )}
           </div>
         </div>
       </section>
 
-      <section className="grid gap-6 rounded-4xl border border-white/12 bg-white/8 p-6 backdrop-blur-xl sm:p-8 xl:grid-cols-[1fr_1fr]">
+      <section className="grid gap-5 rounded-4xl border border-white/12 bg-white/8 p-5 backdrop-blur-xl sm:p-6 xl:grid-cols-[1fr_1fr]">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-200">Catalog snapshot</p>
-          <h2 className="mt-4 text-2xl font-semibold tracking-tight text-white">Keep merchandising surfaces easy to scan</h2>
-          <p className="mt-3 max-w-2xl text-sm leading-7 text-dark-muted">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-200 sm:text-xs sm:tracking-[0.24em]">Catalog snapshot</p>
+          <h2 className="mt-3 text-xl font-semibold tracking-tight text-white sm:text-2xl">Keep merchandising surfaces easy to scan</h2>
+          <p className="mt-2.5 max-w-2xl text-sm leading-6 text-dark-muted">
             Track active categories and featured products while the catalog workspace expands into deeper product management.
           </p>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <article className="rounded-[1.6rem] border border-white/10 bg-[#0d1b30] p-5">
+        <div className="grid gap-3 sm:grid-cols-2">
+          <article className="rounded-[1.35rem] border border-white/10 bg-[#0d1b30] p-4 sm:p-5">
             <p className="text-sm font-semibold text-white">Categories</p>
-            <div className="mt-4 grid gap-3">
+            <div className="mt-3 grid gap-2.5">
               {catalog.categories.length ? (
                 catalog.categories.map((category) => (
-                  <div key={category.slug} className="rounded-[1.2rem] border border-white/10 bg-white/5 px-4 py-3">
-                    <p className="font-medium text-white">{category.name}</p>
+                  <div key={category.slug} className="rounded-[1rem] border border-white/10 bg-white/5 px-3.5 py-3 sm:px-4">
+                    <p className="text-wrap-safe font-medium text-white">{category.name}</p>
                     <p className="mt-1 text-sm leading-6 text-dark-muted">{category.description || "Category ready for storefront browsing."}</p>
                   </div>
                 ))
               ) : (
-                <p className="text-sm leading-7 text-dark-muted">No active categories are available yet.</p>
+                <p className="text-sm leading-6 text-dark-muted">No active categories are available yet.</p>
               )}
             </div>
           </article>
-          <article className="rounded-[1.6rem] border border-white/10 bg-[#0d1b30] p-5">
+          <article className="rounded-[1.35rem] border border-white/10 bg-[#0d1b30] p-4 sm:p-5">
             <div className="flex items-center justify-between gap-3">
               <p className="text-sm font-semibold text-white">Featured products</p>
-              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-200">
+              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-200">
                 {catalog.featuredCount}
               </span>
             </div>
-            <div className="mt-4 grid gap-3">
+            <div className="mt-3 grid gap-2.5">
               {catalog.featuredProducts.length ? (
                 catalog.featuredProducts.map((product) => (
-                  <div key={product.slug} className="rounded-[1.2rem] border border-white/10 bg-white/5 px-4 py-3">
-                    <p className="font-medium text-white">{product.name}</p>
+                  <div key={product.slug} className="rounded-[1rem] border border-white/10 bg-white/5 px-3.5 py-3 sm:px-4">
+                    <p className="text-wrap-safe font-medium text-white">{product.name}</p>
                     <p className="mt-1 text-sm leading-6 text-dark-muted">
                       {product.category?.name ?? "Uncategorized"} · {product.currency} {product.basePrice}
                     </p>
                   </div>
                 ))
               ) : (
-                <p className="text-sm leading-7 text-dark-muted">No featured products are available yet.</p>
+                <p className="text-sm leading-6 text-dark-muted">No featured products are available yet.</p>
               )}
             </div>
           </article>
         </div>
       </section>
 
-      <section className="grid gap-6 rounded-4xl border border-white/12 bg-white/8 p-6 backdrop-blur-xl sm:p-8 lg:grid-cols-[1fr_0.9fr]">
+      <section className="grid gap-5 rounded-4xl border border-white/12 bg-white/8 p-5 backdrop-blur-xl sm:p-6 lg:grid-cols-[1fr_0.9fr]">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-200">Storefront shortcuts</p>
-          <h2 className="mt-4 text-2xl font-semibold tracking-tight text-white">Check customer-facing surfaces without leaving admin</h2>
-          <p className="mt-3 max-w-2xl text-sm leading-7 text-dark-muted">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-200 sm:text-xs sm:tracking-[0.24em]">Storefront shortcuts</p>
+          <h2 className="mt-3 text-xl font-semibold tracking-tight text-white sm:text-2xl">Check customer-facing surfaces without leaving admin</h2>
+          <p className="mt-2.5 max-w-2xl text-sm leading-6 text-dark-muted">
             Jump back to the public storefront whenever you need to confirm the customer experience.
           </p>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2">
+        <div className="grid gap-2.5 sm:grid-cols-2">
           {storefrontLinks.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-[1.3rem] border border-white/10 bg-[#0d1b30] px-4 py-4 text-sm font-semibold text-white transition hover:border-sky-300/30 hover:text-sky-200"
+              className="rounded-[1.1rem] border border-white/10 bg-[#0d1b30] px-4 py-3 text-sm font-semibold text-white transition hover:border-sky-300/30 hover:text-sky-200"
             >
               {item.label}
             </Link>
@@ -299,37 +299,37 @@ export default async function AdminPage() {
         </div>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-3">
-        <article className="rounded-4xl border border-white/12 bg-white/8 p-5 backdrop-blur-xl">
+      <section className="grid gap-3 md:grid-cols-3">
+        <article className="rounded-4xl border border-white/12 bg-white/8 p-4 backdrop-blur-xl sm:p-5">
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-[#0d1b30] text-sky-200">
+            <span className="flex h-10 w-10 items-center justify-center rounded-[1rem] border border-white/10 bg-[#0d1b30] text-sky-200 sm:h-11 sm:w-11 sm:rounded-2xl">
               <ClipboardList className="h-5 w-5" />
             </span>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-200">Pending now</p>
-              <p className="mt-1 text-2xl font-semibold text-white">{orderSummary.pendingOrders}</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-200 sm:text-xs sm:tracking-[0.2em]">Pending now</p>
+              <p className="mt-1 text-xl font-semibold text-white sm:text-2xl">{orderSummary.pendingOrders}</p>
             </div>
           </div>
         </article>
-        <article className="rounded-4xl border border-white/12 bg-white/8 p-5 backdrop-blur-xl">
+        <article className="rounded-4xl border border-white/12 bg-white/8 p-4 backdrop-blur-xl sm:p-5">
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-[#0d1b30] text-sky-200">
+            <span className="flex h-10 w-10 items-center justify-center rounded-[1rem] border border-white/10 bg-[#0d1b30] text-sky-200 sm:h-11 sm:w-11 sm:rounded-2xl">
               <Boxes className="h-5 w-5" />
             </span>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-200">Catalog live</p>
-              <p className="mt-1 text-2xl font-semibold text-white">{catalog.productCount}</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-200 sm:text-xs sm:tracking-[0.2em]">Catalog live</p>
+              <p className="mt-1 text-xl font-semibold text-white sm:text-2xl">{catalog.productCount}</p>
             </div>
           </div>
         </article>
-        <article className="rounded-4xl border border-white/12 bg-white/8 p-5 backdrop-blur-xl">
+        <article className="rounded-4xl border border-white/12 bg-white/8 p-4 backdrop-blur-xl sm:p-5">
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-[#0d1b30] text-sky-200">
+            <span className="flex h-10 w-10 items-center justify-center rounded-[1rem] border border-white/10 bg-[#0d1b30] text-sky-200 sm:h-11 sm:w-11 sm:rounded-2xl">
               <Sparkles className="h-5 w-5" />
             </span>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-200">Featured active</p>
-              <p className="mt-1 text-2xl font-semibold text-white">{catalog.featuredCount}</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-200 sm:text-xs sm:tracking-[0.2em]">Featured active</p>
+              <p className="mt-1 text-xl font-semibold text-white sm:text-2xl">{catalog.featuredCount}</p>
             </div>
           </div>
         </article>

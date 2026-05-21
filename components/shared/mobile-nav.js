@@ -27,7 +27,7 @@ export function MobileNav({ isAdmin, isAuthenticated, primaryCta }) {
       <button
         aria-expanded={isOpen}
         aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-        className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border/80 bg-white/92 text-foreground shadow-sm transition hover:border-primary/30 hover:text-primary"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-white/92 text-foreground shadow-sm transition hover:border-primary/30 hover:text-primary sm:h-11 sm:w-11"
         onClick={() => setIsOpen((currentValue) => !currentValue)}
         type="button"
       >
@@ -35,17 +35,17 @@ export function MobileNav({ isAdmin, isAuthenticated, primaryCta }) {
       </button>
       <div
         className={cn(
-          "absolute inset-x-0 top-full mt-3 rounded-4xl border border-white/75 bg-white/98 p-4 shadow-[0_28px_70px_rgba(15,23,42,0.18)] backdrop-blur-xl transition sm:p-5",
+          "absolute inset-x-0 top-full mt-2.5 rounded-[1.9rem] border border-white/75 bg-white/98 p-3.5 shadow-[0_28px_70px_rgba(15,23,42,0.18)] backdrop-blur-xl transition sm:mt-3 sm:p-4",
           isOpen ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0"
         )}
       >
-        <div className="max-h-[calc(100vh-8rem)] overflow-y-auto pr-1">
-          <div className="flex flex-col gap-3">
+        <div className="max-h-[calc(100vh-7rem)] overflow-y-auto pr-1">
+          <div className="flex flex-col gap-2.5">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-2xl border border-border/70 bg-background/88 px-4 py-3 text-sm font-semibold text-foreground transition hover:border-primary/20 hover:bg-white hover:text-primary"
+                className="rounded-[1.1rem] border border-border/70 bg-background/88 px-3.5 py-2.5 text-sm font-semibold text-foreground transition hover:border-primary/20 hover:bg-white hover:text-primary"
                 onClick={closeMenu}
               >
                 {item.label}
@@ -53,7 +53,7 @@ export function MobileNav({ isAdmin, isAuthenticated, primaryCta }) {
             ))}
             <Link
               href="/cart"
-              className="rounded-2xl border border-border/70 bg-background/88 px-4 py-3 text-sm font-semibold text-foreground transition hover:border-primary/20 hover:bg-white hover:text-primary"
+              className="rounded-[1.1rem] border border-border/70 bg-background/88 px-3.5 py-2.5 text-sm font-semibold text-foreground transition hover:border-primary/20 hover:bg-white hover:text-primary"
               onClick={closeMenu}
             >
               Cart{hydrated && itemCount ? ` (${itemCount})` : ""}
@@ -62,13 +62,13 @@ export function MobileNav({ isAdmin, isAuthenticated, primaryCta }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-2xl border border-border/70 bg-background/88 px-4 py-3 text-sm font-semibold text-foreground transition hover:border-primary/20 hover:bg-white hover:text-primary"
+                className="rounded-[1.1rem] border border-border/70 bg-background/88 px-3.5 py-2.5 text-sm font-semibold text-foreground transition hover:border-primary/20 hover:bg-white hover:text-primary"
                 onClick={closeMenu}
               >
                 {item.label}
               </Link>
             ))}
-            <Button href={primaryCta.href} onClick={closeMenu}>
+            <Button className="w-full" href={primaryCta.href} onClick={closeMenu}>
               {primaryCta.label}
             </Button>
           </div>
