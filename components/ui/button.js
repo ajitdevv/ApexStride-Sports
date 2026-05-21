@@ -11,7 +11,7 @@ const buttonVariants = cva(
         primary: "bg-primary px-4 py-2.5 text-primary-foreground shadow-[0_16px_30px_rgba(20,71,230,0.22)] hover:bg-[#0f39b8] sm:px-5 sm:py-3",
         secondary: "bg-secondary px-4 py-2.5 text-secondary-foreground shadow-[0_12px_24px_rgba(15,23,42,0.05)] hover:bg-[#cfdef9] hover:text-foreground sm:px-5 sm:py-3",
         ghost: "border border-transparent bg-transparent px-3.5 py-2 text-foreground hover:border-border hover:bg-white/88 hover:text-primary sm:px-4 sm:py-2.5",
-        outline: "border border-border bg-white/94 px-4 py-2.5 text-foreground shadow-[0_12px_24px_rgba(15,23,42,0.05)] hover:border-primary/35 hover:bg-white hover:text-primary sm:px-5 sm:py-3",
+        outline: "border border-white/85 bg-white/96 px-4 py-2.5 text-foreground shadow-[0_14px_30px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 hover:border-primary/30 hover:bg-white hover:text-primary sm:px-5 sm:py-3",
       },
       size: {
         default: "h-10 sm:h-11",

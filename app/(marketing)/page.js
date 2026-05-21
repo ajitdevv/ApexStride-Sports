@@ -6,7 +6,6 @@ import { SiteFooter } from "@/components/shared/site-footer";
 import { SiteHeader } from "@/components/shared/site-header";
 import { BadgePill } from "@/components/shared/badge-pill";
 import { SectionShell } from "@/components/shared/section-shell";
-import { Button } from "@/components/ui/button";
 import { getCategoryHref, getStorefrontSnapshot } from "@/lib/catalog";
 
 const shoppingBenefits = [
@@ -115,10 +114,6 @@ export default async function MarketingHomePage() {
                   Discover the products highlighted for athletes who want cleaner design, dependable utility, and faster decisions.
                 </p>
               </div>
-              <Button href="/shop" variant="secondary">
-                Shop all products
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
             </div>
             <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
               {featuredProducts.length ? (

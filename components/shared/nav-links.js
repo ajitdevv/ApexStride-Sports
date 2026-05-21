@@ -18,20 +18,20 @@ export function NavLinks({ items, className, stacked = false, tone = "light" }) 
 
         const inactiveClasses =
           tone === "dark"
-            ? "text-slate-200 hover:bg-white/10 hover:text-white"
-            : "text-foreground/78 hover:bg-white/90 hover:text-foreground";
+            ? "border border-white/10 text-slate-200 hover:-translate-y-0.5 hover:bg-white/10 hover:text-white"
+            : "border border-transparent bg-white/70 text-foreground/80 shadow-[0_10px_24px_rgba(15,23,42,0.04)] hover:-translate-y-0.5 hover:border-white/85 hover:bg-white hover:text-foreground hover:shadow-[0_16px_32px_rgba(15,23,42,0.08)]";
 
         const activeClasses =
           tone === "dark"
-            ? "bg-linear-to-r from-sky-400 to-indigo-400 text-slate-950 shadow-[0_18px_35px_rgba(56,189,248,0.25)]"
-            : "bg-primary text-primary-foreground shadow-[0_12px_24px_rgba(20,71,230,0.18)]";
+            ? "border border-sky-300/40 bg-linear-to-r from-sky-400 to-indigo-400 text-slate-950 shadow-[0_18px_35px_rgba(56,189,248,0.25)]"
+            : "border border-primary/30 bg-primary text-primary-foreground shadow-[0_14px_28px_rgba(20,71,230,0.22)]";
 
         return (
           <Link
             key={item.href}
             href={item.href}
             className={cn(
-              "rounded-full px-4 py-2 text-sm font-semibold transition",
+              "rounded-full px-4 py-2 text-sm font-semibold transition duration-200",
               isActive ? activeClasses : inactiveClasses
             )}
           >

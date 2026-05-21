@@ -1,4 +1,4 @@
-import { ArrowRight, ShieldCheck, Sparkles, Truck } from "lucide-react";
+import { LayoutGrid, ShieldCheck, ShoppingBag, Sparkles, Truck } from "lucide-react";
 import { siteConfig } from "@/lib/config/site";
 import { BadgePill } from "@/components/shared/badge-pill";
 import { Button } from "@/components/ui/button";
@@ -34,10 +34,11 @@ export function HeroSection() {
           </p>
           <div className="mobile-stack-gap mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
             <Button href={siteConfig.hero.primaryCta.href} size="lg">
+              <ShoppingBag className="mr-2 h-4 w-4" />
               {siteConfig.hero.primaryCta.label}
-              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
             <Button href={siteConfig.hero.secondaryCta.href} size="lg" variant="outline">
+              <LayoutGrid className="mr-2 h-4 w-4" />
               {siteConfig.hero.secondaryCta.label}
             </Button>
           </div>
@@ -77,9 +78,6 @@ export function HeroSection() {
           <p className="mt-2 text-xs leading-6 text-foreground/78 sm:text-sm">
             Start with recovery, hydration, or training support and move straight into products that match your next session.
           </p>
-          <Button className="mt-5" href="/shop" variant="secondary">
-            Browse all categories
-          </Button>
         </article>
       </div>
     </SectionShell>
